@@ -1,0 +1,9 @@
+# Normalize line endings so the repo is consistent across OSes.
+* text=auto eol=lf
+*.bat  text eol=crlf
+*.ps1  text eol=crlf
+# Treat binaries as binary (no EOL conversion, no diff noise).
+*.png  binary
+*.gif  binary
+*.ico  binary
+*.zip  binary
