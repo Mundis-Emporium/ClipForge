@@ -1,0 +1,5 @@
+# Extra deps needed only to BUILD the packaged desktop app (not at runtime).
+-r requirements.txt
+pyinstaller>=6.6
+pywebview>=5.1
+imageio-ffmpeg>=0.5.1

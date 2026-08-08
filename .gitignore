@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+work/
+output/
+uploads/
+cache/
+browser-profile/
+config.json
+
+# build artifacts
+build/
+dist/
+bin/
+*.zip
+*.spec.bak
+*.concat.txt
+.DS_Store

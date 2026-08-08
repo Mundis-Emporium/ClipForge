@@ -1,0 +1,58 @@
+name: Build ClipForge (Windows)
+
+# Build the double-click Windows app and attach it to a GitHub Release.
+# Triggers on a version tag like v0.1.0, or manually from the Actions tab.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-build.txt
+
+      - name: Bundle ffmpeg + ffprobe
+        shell: pwsh
+        run: |
+          # static Windows build that ships both ffmpeg.exe and ffprobe.exe
+          $url = "https://github.com/GyanD/codexffmpeg/releases/download/7.1/ffmpeg-7.1-essentials_build.zip"
+          Invoke-WebRequest -Uri $url -OutFile ffmpeg.zip
+          Expand-Archive ffmpeg.zip -DestinationPath ffdl
+          New-Item -ItemType Directory -Force -Path bin | Out-Null
+          $bindir = Get-ChildItem ffdl -Recurse -Filter ffmpeg.exe | Select-Object -First 1 | Split-Path
+          Copy-Item "$bindir\ffmpeg.exe"  bin\ffmpeg.exe
+          Copy-Item "$bindir\ffprobe.exe" bin\ffprobe.exe
+
+      - name: Build with PyInstaller
+        run: pyinstaller clipforge.spec --noconfirm
+
+      - name: Zip the app
+        shell: pwsh
+        run: Compress-Archive -Path dist\ClipForge\* -DestinationPath ClipForge-Windows.zip
+
+      - name: Upload artifact (for manual runs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ClipForge-Windows
+          path: ClipForge-Windows.zip
+
+      - name: Attach to Release (tag builds)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ClipForge-Windows.zip
+          generate_release_notes: true

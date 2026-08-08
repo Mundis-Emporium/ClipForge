@@ -1,0 +1,23 @@
+# --- ClipForge core (required) ---
+fastapi>=0.115
+uvicorn[standard]>=0.34
+python-multipart>=0.0.20
+yt-dlp>=2026.3.17
+
+# browser impersonation so yt-dlp can pass Cloudflare anti-bot challenges.
+# yt-dlp supports curl_cffi 0.10.x through 0.15.x (not 0.16+).
+curl_cffi>=0.10,<0.16
+
+# native desktop window (own window, taskbar icon, no browser tab).
+# falls back to the default browser automatically if unavailable.
+pywebview>=5.1
+
+# --- Optional: smart auto-cut (silence/dead-air removal) ---
+# auto-editor is invoked as a CLI if present; install to enable.
+auto-editor>=27.4
+
+# --- Optional: beat-synced montage + content-onset detection ---
+# If librosa is missing, montage falls back to a fixed-BPM / fixed-chunk grid.
+librosa>=0.10
+soundfile>=0.12
+numpy>=1.24
