@@ -5,30 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ClipForge</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  :root{
-    --bg:#0b0d13; --panel:#141824; --panel2:#1b2130; --line:#272f42;
-    --txt:#e8ebf2; --dim:#8a93a8; --acc:#6d8bff; --acc2:#b06dff;
-    --pink:#ec4899;
-    --ok:#3ecf8e; --err:#ff6d6d; --warn:#ffcf6d;
-    --radius:14px; --ring:0 0 0 3px rgba(109,139,255,.35);
-  }
+  :root{color-scheme:light}
   *{box-sizing:border-box}
   *{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
   ::-webkit-scrollbar{width:8px;height:8px}
   ::-webkit-scrollbar-track{background:transparent}
   ::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px;border:2px solid transparent;background-clip:content-box}
   ::-webkit-scrollbar-thumb:hover{background:#3b475f;background-clip:content-box}
-  ::selection{background:rgba(176,109,255,.35)}
+  ::selection{background:#e4c1b4;color:#182321}
   body{margin:0;font-family:'Inter',system-ui,Segoe UI,Roboto,sans-serif;
     -webkit-font-smoothing:antialiased;letter-spacing:-.01em;
-    background:radial-gradient(1200px 620px at 18% -12%,#1c2440 0,var(--bg) 58%);
+    background:var(--bg);
     color:var(--txt);min-height:100vh}
   .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
   header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
   .logo{width:42px;height:42px;border-radius:12px;
-    background:linear-gradient(135deg,var(--acc),var(--acc2));
-    display:grid;place-items:center;color:#fff;box-shadow:0 8px 24px #6d8bff44}
+    background:var(--acc);
+    display:grid;place-items:center;color:#fff;box-shadow:none}
   .logo svg{width:22px;height:22px}
   h1{font-size:22px;margin:0;font-weight:700;letter-spacing:-.02em}
   .sub{color:var(--dim);font-size:13px;margin:2px 0 22px}
@@ -56,19 +49,19 @@
   .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px}
   .mode{background:var(--panel2);border:1px solid var(--line);border-radius:10px;
     padding:12px 10px;cursor:pointer;text-align:center;font-size:13px;font-weight:500}
-  .mode:hover{border-color:#3b475f;background:#1f2636}
-  .mode small{display:block;color:var(--dim);font-size:11px;margin-top:3px;font-weight:400}
-  .mode.on{border-color:var(--acc);background:#1c2440;box-shadow:0 0 0 1px var(--acc) inset}
-  .mode.on small{color:#aab7de}
+  .mode:hover{border-color:#3b475f;background:var(--panel2)}
+  .mode small{display:block;color:var(--dim);font-size:12px;margin-top:3px;font-weight:400}
+  .mode.on{border-color:var(--acc);background:var(--panel2);box-shadow:0 0 0 1px var(--acc) inset}
+  .mode.on small{color:var(--dim)}
   label.field{display:block;font-size:12px;color:var(--dim);margin:12px 0 5px}
   select,input[type=number],input[type=text]{width:100%;background:var(--panel2);
     color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:13px}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .btn{border:none;border-radius:10px;padding:11px 16px;font-size:14px;font-weight:600;
     cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px}
-  .btn.primary{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;
-    box-shadow:0 6px 20px #6d8bff33;width:100%;margin-top:16px;padding:13px;font-size:15px}
-  .btn.primary:hover{filter:brightness(1.08);box-shadow:0 8px 26px #6d8bff55}
+  .btn.primary{background:var(--acc);color:#fff;
+    box-shadow:none;width:100%;margin-top:16px;padding:13px;font-size:15px}
+  .btn.primary:hover{filter:brightness(1.08);box-shadow:none}
   .btn.primary:disabled{opacity:.5;cursor:not-allowed;filter:none;box-shadow:none}
   .btn.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
   .btn.ghost:hover{border-color:var(--acc);color:#fff}
@@ -85,36 +78,36 @@
     background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .3s}
   .stage{font-size:13px;color:var(--dim);margin:8px 0 2px}
   .logbox{background:#0a0c12;border:1px solid var(--line);border-radius:9px;
-    font-family:ui-monospace,monospace;font-size:11.5px;color:#9fb0d0;
+    font-family:ui-monospace,monospace;font-size:12px;color:#9fb0d0;
     padding:10px;max-height:180px;overflow:auto;margin-top:8px;white-space:pre-wrap}
   video{width:100%;border-radius:11px;margin-top:12px;background:#000}
-  .pill{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--panel2);
+  .pill{font-size:12px;padding:3px 9px;border-radius:20px;background:var(--panel2);
     border:1px solid var(--line);color:var(--dim)}
   a.dl{display:inline-block;margin-top:10px}
-  .hint{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.5}
-  code{background:var(--panel2);padding:1px 5px;border-radius:5px;font-size:11.5px}
+  .hint{font-size:12px;color:var(--dim);margin-top:6px;line-height:1.5}
+  code{background:var(--panel2);padding:1px 5px;border-radius:5px;font-size:12px}
   .cap-list{max-height:240px;overflow-y:auto;overflow-x:hidden;margin-top:4px}
   .cap-item{display:flex;align-items:center;gap:6px;padding:7px 8px;
     border:1px solid var(--line);border-radius:8px;margin-bottom:6px;background:var(--panel2)}
   .cap-item .dot{width:8px;height:8px;border-radius:50%;flex:none}
-  .cap-item .u{flex:1 1 auto;min-width:0;font-size:11.5px;font-family:ui-monospace,monospace;
+  .cap-item .u{flex:1 1 auto;min-width:0;font-size:12px;font-family:ui-monospace,monospace;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .cap-item .st{font-size:10px;color:var(--dim);flex:none;white-space:nowrap;
+  .cap-item .st{font-size:12px;color:var(--dim);flex:none;white-space:nowrap;
     max-width:130px;overflow:hidden;text-overflow:ellipsis}
   .cap-item .x{cursor:pointer;color:var(--dim);flex:none;font-size:14px;padding:0 3px}
   .cap-item .x:hover{color:var(--err)}
   .cap-item .dlb{cursor:pointer;color:var(--dim);flex:none;font-size:13px;padding:0 3px}
   .cap-item .dlb:hover{color:var(--acc)}
   .cap-item .qsel{flex:none;width:auto;background:var(--bg);border:1px solid var(--line);
-    color:var(--dim);border-radius:6px;padding:2px 4px;font-size:10.5px}
+    color:var(--dim);border-radius:6px;padding:2px 4px;font-size:12px}
   .cap-empty{color:var(--dim);font-size:12px;opacity:.6;padding:6px 2px}
   .clip-row{display:flex;align-items:center;gap:6px;padding:6px;border:1px solid var(--line);
     border-radius:8px;margin-bottom:5px;background:var(--panel2)}
-  .clip-row .n{color:var(--dim);font-size:11px;width:18px;flex:none;text-align:center}
-  .clip-row .cu{flex:1;font-size:11px;font-family:ui-monospace,monospace;
+  .clip-row .n{color:var(--dim);font-size:12px;width:18px;flex:none;text-align:center}
+  .clip-row .cu{flex:1;font-size:12px;font-family:ui-monospace,monospace;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .clip-row input{width:48px;background:var(--bg);border:1px solid var(--line);
-    color:var(--txt);border-radius:6px;padding:4px;font-size:11px}
+    color:var(--txt);border-radius:6px;padding:4px;font-size:12px}
   .clip-row button{background:none;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 3px}
   .clip-row button:hover{color:var(--acc)}
   .failbox{background:#2a1414;border:1px solid var(--err);border-radius:9px;padding:8px 10px;
@@ -124,6 +117,7 @@
     font-size:13px;opacity:0;transition:.3s;pointer-events:none}
   .toast.show{opacity:1}
 </style>
+<link rel="stylesheet" href="/static/workbench.css" />
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -141,16 +135,23 @@
 </defs></svg>
 
 <div class="wrap">
-  <header style="justify-content:space-between">
+  <header class="app-header" style="justify-content:space-between">
     <div style="display:flex;align-items:center;gap:14px">
       <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-film"/></svg></div>
       <div>
         <h1>ClipForge</h1>
-        <div class="sub" id="sub">Paste links, get a finished compilation. Runs entirely on your computer.</div>
+        <div class="sub" id="sub">Local video workspace</div>
       </div>
     </div>
     <button class="btn ghost sm" id="quitBtn" title="Shut down ClipForge"><svg class="ic"><use href="#i-power"/></svg> Quit</button>
   </header>
+
+  <div class="workspace-intro">
+    <div>
+      <h2>New compilation</h2>
+      <p>Add video links or local clips, choose an edit mode, then export an MP4.</p>
+    </div>
+  </div>
 
   <div id="banner" style="display:none;background:#3a1414;border:1px solid var(--err);
     color:#ffb4b4;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:13px"></div>
@@ -159,15 +160,15 @@
     <!-- LEFT: main -->
     <div>
       <div class="card">
-        <h2><svg class="ic"><use href="#i-link"/></svg>Links</h2>
+        <h2><svg class="ic"><use href="#i-link"/></svg>Sources <span class="section-aside">Paste one link per line</span></h2>
         <textarea id="links" placeholder="One video URL per line. YouTube, TikTok, X, Reddit, Vimeo, direct .mp4, and more.&#10;https://...&#10;https://..."></textarea>
         <div class="row">
           <span class="pill" id="linkcount">0 links</span>
-          <button class="btn ghost sm" id="pullInbox">⬇ Pull captured (<span id="inboxN">0</span>)</button>
+          <button class="btn ghost sm" id="pullInbox">Pull captured (<span id="inboxN">0</span>)</button>
           <button class="btn ghost sm" id="clearLinks">Clear</button>
         </div>
         <details style="margin-top:10px">
-          <summary style="cursor:pointer;color:var(--dim);font-size:12px">📁 Add local videos you already have</summary>
+          <summary style="cursor:pointer;color:var(--dim);font-size:12px">Add local videos you already have</summary>
           <div class="hint" style="margin-top:6px">List videos from a folder (blank = your downloads) and add them to the compilation. No re-downloading.</div>
           <div class="row" style="margin-top:8px">
             <input type="text" id="localDir" placeholder="folder path (blank = downloads)" style="flex:1"/>
@@ -180,17 +181,17 @@
         <details style="margin-top:10px" id="editWrap">
           <summary style="cursor:pointer;color:var(--dim);font-size:12px">Edit clips: reorder and trim</summary>
           <div class="hint" style="margin-top:6px">Build the list from the links above, then reorder rows or set a start and end in seconds (0 means the full clip). This replaces the plain order.</div>
-          <button class="btn ghost sm" id="buildClips" style="margin-top:8px">↻ Build list from links</button>
+          <button class="btn ghost sm" id="buildClips" style="margin-top:8px">Build list from links</button>
           <div id="clipTable" style="margin-top:8px"></div>
         </details>
       </div>
 
       <div class="card" style="margin-top:16px">
-        <h2><svg class="ic"><use href="#i-sliders"/></svg>Mode</h2>
+        <h2><svg class="ic"><use href="#i-sliders"/></svg>Edit &amp; export <span class="section-aside">Choose a cut and output</span></h2>
         <div class="modes">
-          <div class="mode on" data-mode="stitch">Stitch<small>join in order</small></div>
-          <div class="mode" data-mode="smartcut">Smart cut<small>trim dead air</small></div>
-          <div class="mode" data-mode="montage">Montage<small>beat-synced</small></div>
+          <button type="button" class="mode on" data-mode="stitch" aria-pressed="true">Stitch<small>join in order</small></button>
+          <button type="button" class="mode" data-mode="smartcut" aria-pressed="false">Smart cut<small>trim dead air</small></button>
+          <button type="button" class="mode" data-mode="montage" aria-pressed="false">Montage<small>beat-synced</small></button>
         </div>
 
         <div class="two">
@@ -291,7 +292,7 @@
 
         <button class="btn primary" id="go"><svg class="ic"><use href="#i-bolt"/></svg> Forge compilation</button>
         <div class="row" style="margin-top:8px;gap:8px">
-          <button class="btn ghost sm" id="playStream" style="flex:1">▶ Play as stream (no download)</button>
+          <button class="btn ghost sm" id="playStream" style="flex:1">Play as stream (no download)</button>
           <label class="chk" style="margin:0"><input type="checkbox" id="shufStream"/> shuffle</label>
         </div>
 
@@ -309,20 +310,20 @@
     <!-- RIGHT: capture + info -->
     <div>
       <div class="card">
-        <h2><svg class="ic"><use href="#i-inbox"/></svg>Captured links</h2>
+        <h2><svg class="ic"><use href="#i-inbox"/></svg>Capture queue</h2>
         <label class="chk" style="margin:0 0 8px"><input type="checkbox" id="autoDl" checked /> auto-download captured links</label>
         <div id="capList" class="cap-list"></div>
         <div class="row" style="margin-top:10px">
-          <button class="btn ghost sm" id="prefetchAll">⬇ Download all now</button>
-          <button class="btn ghost sm" id="openDownloads">📂 Downloads</button>
-          <button class="btn ghost sm" id="openExports">📂 Exports</button>
+          <button class="btn ghost sm" id="prefetchAll">Download all now</button>
+          <button class="btn ghost sm" id="openDownloads">Downloads</button>
+          <button class="btn ghost sm" id="openExports">Exports</button>
           <button class="btn ghost sm" id="clearInbox">Clear</button>
         </div>
         <div class="hint" style="margin-top:8px">Captured links download in the background while you keep adding. <span style="color:var(--ok)">●</span> ready &nbsp; <span style="color:var(--warn)">●</span> downloading &nbsp; <span style="color:var(--err)">●</span> failed</div>
       </div>
 
       <div class="card" style="margin-top:16px">
-        <h2><svg class="ic"><use href="#i-puzzle"/></svg>One-click capture setup</h2>
+        <h2><svg class="ic"><use href="#i-puzzle"/></svg>Browser capture</h2>
         <div class="hint">Launch a browser with the ClipForge capture extension already loaded, so you do not have to install anything by hand.</div>
         <div class="row" style="margin-top:10px">
           <select id="browserSel" style="flex:1"><option>detecting…</option></select>
@@ -331,7 +332,7 @@
         <div class="hint" id="extNote" style="margin-top:8px"></div>
 
         <details style="margin-top:10px">
-          <summary style="cursor:pointer;color:var(--dim);font-size:12px">📖 Add it manually (step by step)</summary>
+          <summary style="cursor:pointer;color:var(--dim);font-size:12px">Add it manually (step by step)</summary>
           <ol class="hint" style="margin:8px 0 0;padding-left:18px;line-height:1.7">
             <li>Keep ClipForge running.</li>
             <li>Click <b>Open extension folder</b> below (or copy the path).</li>
@@ -341,8 +342,8 @@
             <li>Pin ClipForge (puzzle icon 🧩). Click it on any video page, or right-click → <b>Add to ClipForge</b>.</li>
           </ol>
           <div class="row" style="margin-top:8px">
-            <button class="btn ghost sm" id="openExt">📂 Open extension folder</button>
-            <button class="btn ghost sm" id="copyExt">📋 Copy path</button>
+            <button class="btn ghost sm" id="openExt">Open extension folder</button>
+            <button class="btn ghost sm" id="copyExt">Copy path</button>
           </div>
           <div class="hint" id="extPath" style="margin-top:6px;font-family:ui-monospace,monospace;word-break:break-all"></div>
         </details>
@@ -350,12 +351,12 @@
         <details style="margin-top:8px">
           <summary style="cursor:pointer;color:var(--dim);font-size:12px">or use the no-install bookmarklet</summary>
           <div class="hint" style="margin-top:6px">Drag this to your bookmarks bar (Ctrl+Shift+B to show it), then click it on any video page:</div>
-          <a id="bm" class="btn ghost sm" style="display:inline-block;margin-top:8px;text-decoration:none">📎 Add to ClipForge</a>
+          <a id="bm" class="btn ghost sm" style="display:inline-block;margin-top:8px;text-decoration:none">Add to ClipForge</a>
         </details>
       </div>
 
       <div class="card" style="margin-top:16px">
-        <h2><svg class="ic"><use href="#i-folder"/></svg>Project & storage</h2>
+        <h2><svg class="ic"><use href="#i-folder"/></svg>Project &amp; storage</h2>
         <label class="field">Project / category (own export folder)</label>
         <input type="text" id="project" placeholder="e.g. gym-montages" />
         <label class="field">Use cookies from browser (for login / age-gated)</label>
@@ -378,7 +379,7 @@
           <input type="number" id="idleMin" value="0" min="0" />
           <div class="row" style="margin-top:8px">
             <button class="btn ghost sm" id="saveCfg">Save settings</button>
-            <button class="btn ghost sm" id="purge">🗑 Delete all downloads</button>
+            <button class="btn ghost sm" id="purge">Delete all downloads</button>
           </div>
           <div class="hint" id="cfgNote" style="margin-top:6px"></div>
           <div class="inbox-list" id="projList" style="margin-top:6px"></div>
@@ -391,7 +392,7 @@
           <b>Stitch</b>: download every clip, match size and frame rate, join them.<br>
           <b>Smart cut</b>: remove silences and dead air from each clip, then join.<br>
           <b>Montage</b>: fast cuts synced to a music track's beats, or to each clip's own audio. Add a track for beat detection.<br><br>
-          Everything runs on your machine. Output saved to <code>/output</code>.
+          Everything runs on your machine. Exports are saved to the folder set in Project &amp; storage.
         </div>
       </div>
     </div>
@@ -442,8 +443,8 @@ $("#bm").href = bm;
 // mode toggle -----------------------------------------------------------
 document.querySelectorAll(".mode").forEach(el=>{
   el.onclick=()=>{
-    document.querySelectorAll(".mode").forEach(m=>m.classList.remove("on"));
-    el.classList.add("on"); mode = el.dataset.mode;
+    document.querySelectorAll(".mode").forEach(m=>{m.classList.remove("on");m.setAttribute("aria-pressed","false");});
+    el.classList.add("on"); el.setAttribute("aria-pressed","true"); mode = el.dataset.mode;
     $("#montageOpts").style.display = mode==="montage"?"block":"none";
     $("#linearOpts").style.display = mode==="montage"?"none":"grid";
   };
@@ -742,7 +743,7 @@ async function checkTools(){
   try{
     const h = await (await fetch("/api/health")).json();
     const imp = h.tools && h.tools.impersonation;
-    $("#sub").innerHTML = `Paste links, get a finished compilation. Runs entirely on your computer. <span style="opacity:.6">build ${h.build||'?'}${imp?'':' · impersonation off'}</span>`;
+    $("#sub").textContent = "Local video workspace";
     let warn = "";
     if(h.tools && (!h.tools.ffmpeg || !h.tools.ffprobe))
       warn = "⚠ <b>FFmpeg not found.</b> ClipForge needs ffmpeg + ffprobe on your PATH. Install from ffmpeg.org, then restart.";

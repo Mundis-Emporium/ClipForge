@@ -2,6 +2,8 @@
 
 **ClipForge is a local video compilation and montage maker.** Paste video links, and it downloads clips from 1000+ sites (via yt-dlp) and edits them into stitched or beat-synced montages with FFmpeg, right on your own computer. GPU-accelerated, with a desktop app and a browser capture extension. Nothing is uploaded.
 
+![ClipForge workspace with source links, edit modes and export controls](docs/workspace.png)
+
 <p align="center">
   <img src="docs/demo.gif" alt="ClipForge beat-synced montage" width="720">
   <br><i>Beat-synced montage built from a set of links, in one click.</i>

@@ -5,8 +5,8 @@ python-multipart>=0.0.20
 yt-dlp>=2026.3.17
 
 # browser impersonation so yt-dlp can pass Cloudflare anti-bot challenges.
-# yt-dlp supports curl_cffi 0.10.x through 0.15.x (not 0.16+).
-curl_cffi>=0.10,<0.16
+# yt-dlp 2026.03.17 supports curl_cffi 0.10.x through 0.14.x.
+curl_cffi>=0.10,<0.15
 
 # native desktop window (own window, taskbar icon, no browser tab).
 # falls back to the default browser automatically if unavailable.
